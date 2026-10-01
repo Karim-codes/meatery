@@ -13,7 +13,7 @@ Run `npm run build` to create the production bundle. `vercel.json` rewrites dire
 
 ## Update before launch
 
-- Replace the temporary text wordmark in `Brand` (`src/main.jsx`) with the client's official logo asset. No logo file was present in the supplied project folder.
+- The secondary M + flame symbol was recreated as a transparent vector from the supplied logo reference (`public/brand-mark.svg`). Header and footer pair it with the Meatery wordmark. SVG/PNG favicon and Apple touch icon assets use the same symbol.
 - Replace the sample dishes, English and Arabic text, and `price: null` values in `src/data/menu.js` with the approved menu. Numeric prices render as `SAR`.
 - Add the confirmed map pin, opening hours, WhatsApp number, and Instagram account in `src/data/site.js`. The map panel is illustrative; the WhatsApp button currently explains that the number is still missing.
 - Replace generated concept photography with approved photography if the client has it. Current images are in `public/images/`.

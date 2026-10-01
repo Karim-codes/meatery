@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { menuCategories } from "./data/menu";
 import { site } from "./data/site";
+import { Arrow, Asterisk } from "./components/Icons";
 import "./styles.css";
 
 const ASSET = "/images/";
@@ -9,12 +10,15 @@ const whatsappUrl = site.whatsappNumber
   ? `https://wa.me/${site.whatsappNumber}`
   : "";
 
-function Arrow({ diagonal = false }) {
-  return (
-    <span className="arrow" aria-hidden="true">
-      {diagonal ? "↗" : "→"}
-    </span>
-  );
+function useInitialAnchor() {
+  useEffect(() => {
+    const anchor = window.location.hash.slice(1);
+    if (!anchor) return;
+    const frame = requestAnimationFrame(() => {
+      document.getElementById(anchor)?.scrollIntoView();
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 }
 
 function Brand({ large = false }) {
@@ -24,7 +28,15 @@ function Brand({ large = false }) {
       href="/"
       aria-label="Meatery home"
     >
-      MEATERY<span className="brand-dot">.</span>
+      <img
+        className="brand-symbol"
+        src="/brand-mark.svg"
+        alt=""
+        aria-hidden="true"
+      />
+      <span className="brand-wordmark">
+        MEATERY<span className="brand-dot">.</span>
+      </span>
     </a>
   );
 }
@@ -79,7 +91,7 @@ function Header({ menuPage = false }) {
 
 function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <div className="footer-top">
         <Brand large />
         <span>
@@ -89,7 +101,7 @@ function Footer() {
         </span>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} MEATERY</span>
+        <span>COPYRIGHT {new Date().getFullYear()} MEATERY</span>
         <nav aria-label="Footer navigation">
           <a href="/">HOME</a>
           <a href="/menu">MENU</a>
@@ -112,6 +124,7 @@ function SectionLabel({ number, children }) {
 }
 
 function Home() {
+  useInitialAnchor();
   const [contactNotice, setContactNotice] = useState(false);
   useEffect(() => {
     document.title = "Meatery — Madinah";
@@ -208,7 +221,7 @@ function Home() {
           <div className="craft-copy">
             <SectionLabel number="02">OUR APPROACH</SectionLabel>
             <div>
-              <span className="tiny-star">✳</span>
+              <Asterisk className="tiny-star" />
               <h2 id="craft-heading">
                 GOOD FOOD
                 <br />
@@ -293,7 +306,7 @@ function Home() {
                 href="/menu"
                 aria-label="Explore the full menu"
               >
-                ↗
+                <Arrow diagonal />
               </a>
             </div>
           </div>
@@ -479,6 +492,7 @@ function Home() {
 }
 
 function MenuPage() {
+  useInitialAnchor();
   const [language, setLanguage] = useState("en");
   const [active, setActive] = useState(menuCategories[0].id);
   const arabic = language === "ar";
@@ -628,9 +642,10 @@ function MenuPage() {
                           {item.featured && (
                             <span
                               className="menu-item-mark"
-                              aria-label="Featured dish"
+                              role="img"
+                              aria-label={arabic ? "طبق مميز" : "Featured dish"}
                             >
-                              ✳
+                              <Asterisk />
                             </span>
                           )}
                         </h3>
@@ -649,7 +664,7 @@ function MenuPage() {
               </section>
             ))}
             <div className="menu-end">
-              <span>✳</span>
+              <Asterisk className="menu-end-icon" />
               <p>
                 {arabic ? "نراكم حول المائدة." : "See you around the table."}
               </p>

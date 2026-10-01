@@ -46,10 +46,18 @@ p {
 }
 .arrow {
   display: inline-block;
-  font-size: 1.25em;
-  font-weight: 400;
-  line-height: 0.5;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  vertical-align: middle;
   transition: transform 0.25s ease;
+}
+.asterisk {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  vertical-align: middle;
 }
 a:hover .arrow,
 button:hover .arrow {
@@ -83,12 +91,21 @@ button:hover .arrow {
   gap: 48px;
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 700;
   font-size: 35px;
   letter-spacing: 0.04em;
   line-height: 1;
   white-space: nowrap;
+}
+.brand-symbol {
+  width: 30px;
+  height: 44px;
+  flex: none;
+  object-fit: contain;
 }
 .brand-dot {
   color: #bfa98b;
@@ -274,6 +291,8 @@ button:hover .arrow {
   color: #111;
 }
 .text-link {
+  display: inline-flex;
+  align-items: center;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -555,6 +574,7 @@ button:hover .arrow {
 .round-arrow {
   width: 68px;
   height: 68px;
+  flex: none;
   border: 1px solid #222;
   border-radius: 50%;
   display: grid;
@@ -563,6 +583,10 @@ button:hover .arrow {
   transition:
     background 0.25s,
     color 0.25s;
+}
+.round-arrow .arrow {
+  width: 28px;
+  height: 28px;
 }
 .round-arrow:hover {
   background: #111;
@@ -933,8 +957,14 @@ button:hover .arrow {
   padding-bottom: 90px;
 }
 .brand--large {
+  gap: clamp(20px, 3vw, 48px);
   font-size: clamp(70px, 12vw, 205px);
   letter-spacing: -0.015em;
+}
+.brand--large .brand-symbol {
+  width: clamp(48px, 7vw, 110px);
+  height: auto;
+  aspect-ratio: 160 / 230;
 }
 .footer-top > span {
   font-size: 10px;
@@ -1192,10 +1222,12 @@ button:hover .arrow {
   margin-top: 7px;
 }
 .menu-item-mark {
+  display: inline-flex;
+  align-items: center;
   font-size: 14px;
   color: #b49b79;
   margin-left: 10px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 .menu-price {
   font-size: 11px;
@@ -1213,7 +1245,7 @@ button:hover .arrow {
   align-items: center;
   text-align: center;
 }
-.menu-end > span {
+.menu-end-icon {
   font-size: 30px;
   color: #b09c80;
 }
@@ -1316,6 +1348,14 @@ button:hover .arrow {
   }
   .brand {
     font-size: 30px;
+    gap: 11px;
+  }
+  .brand-symbol {
+    width: 24px;
+    height: 36px;
+  }
+  .brand--large {
+    font-size: clamp(70px, 12vw, 205px);
   }
   .main-nav {
     display: none;
@@ -1575,12 +1615,13 @@ button:hover .arrow {
     margin-top: 16px;
   }
   .hero-ctas {
-    gap: 20px;
+    gap: 16px;
     align-items: center;
+    flex-wrap: wrap;
   }
   .hero-ctas .button {
     padding: 0 16px;
-    gap: 23px;
+    gap: 18px;
     min-height: 54px;
     font-size: 10px;
   }
@@ -1607,7 +1648,7 @@ button:hover .arrow {
     padding: 35px 20px;
   }
   .craft-copy h2 {
-    font-size: clamp(75px, 18vw, 105px);
+    font-size: clamp(60px, 16vw, 90px);
   }
   .craft-copy p {
     font-size: 15px;
@@ -1642,6 +1683,15 @@ button:hover .arrow {
   }
   .featured-end {
     margin-top: 50px;
+    gap: 18px;
+  }
+  .round-arrow {
+    width: 56px;
+    height: 56px;
+  }
+  .round-arrow .arrow {
+    width: 24px;
+    height: 24px;
   }
   .statement-section {
     height: 480px;
@@ -1650,14 +1700,14 @@ button:hover .arrow {
     object-position: 62% center;
   }
   .statement-content h2 {
-    font-size: clamp(68px, 16vw, 90px);
+    font-size: clamp(58px, 15.5vw, 80px);
   }
   .gallery-heading {
     display: block;
     margin: 37px 0;
   }
   .gallery-heading h2 {
-    font-size: 76px;
+    font-size: clamp(60px, 16vw, 76px);
   }
   .gallery-heading span {
     display: block;
@@ -1698,7 +1748,7 @@ button:hover .arrow {
     padding: 90px 0;
   }
   .social-grid h2 {
-    font-size: 94px;
+    font-size: clamp(64px, 18vw, 94px);
   }
   .social-grid p {
     font-size: 16px;
@@ -1713,7 +1763,11 @@ button:hover .arrow {
     display: block;
   }
   .brand--large {
-    font-size: 25vw;
+    font-size: 20vw;
+    gap: 18px;
+  }
+  .brand--large .brand-symbol {
+    width: 12vw;
   }
   .footer-top > span {
     display: block;
@@ -1763,7 +1817,7 @@ button:hover .arrow {
     margin-bottom: 68px;
   }
   .menu-category-heading h2 {
-    font-size: 68px;
+    font-size: clamp(52px, 14vw, 68px);
   }
   .menu-category-heading p {
     font-size: 12px;
