@@ -992,6 +992,22 @@ button:hover .arrow {
 .footer-bottom a:hover {
   color: #fff;
 }
+.footer-credit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+  color: #a19d95;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.footer-credit a {
+  margin-left: 4px;
+  color: #f3f1eb;
+  text-underline-offset: 3px;
+}
+.footer-credit a:hover {
+  text-decoration: underline;
+}
 
 /* QR menu */
 .menu-page {
@@ -1779,6 +1795,10 @@ button:hover .arrow {
   }
   .footer-bottom nav {
     margin-top: 17px;
+  }
+  .footer-credit {
+    justify-content: flex-start;
+    margin-top: 23px;
   }
   .menu-hero {
     height: 300px;

@@ -109,6 +109,17 @@ function Footer() {
         </nav>
         <span>MADE FOR THE MOMENTS THAT MATTER.</span>
       </div>
+      <div className="footer-credit">
+        Built by{" "}
+        <a
+          href="https://coderaxa.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="CodeRaxa website, opens in a new tab"
+        >
+          CodeRaxa
+        </a>
+      </div>
     </footer>
   );
 }
