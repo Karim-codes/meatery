@@ -1,0 +1,20 @@
+import React from "react";
+
+// The supplied Meatery M + flame, matching public/brand-mark.svg.
+export function BrandMark({ className = "" }) {
+  return (
+    <svg
+      className={`brand-mark ${className}`.trim()}
+      viewBox="0 0 160 230"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        transform="translate(3 0) scale(.88 .8)"
+        d="M76 2c21 19 26 35 20 57-4 13-3 25 7 36 7-13 9-24 3-39 24 20 35 42 27 65-7 22-24 36-51 55 9-19 22-30 20-47-2-15-14-23-23-43-9 18-10 35 4 52-27-12-40-32-38-56 2-25 23-39 31-61 3-8 4-14 0-19Z"
+      />
+      <path d="M4 88h24l67 95-16 18-53-76v74c0 4 3 7 9 9v20H20L4 212V88Zm129 0h23v124l-16 16h-16v-20c6-2 9-5 9-9v-74l-38 55-16-23 54-69Z" />
+    </svg>
+  );
+}

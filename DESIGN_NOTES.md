@@ -18,3 +18,15 @@ Official restaurant sites reviewed before implementation:
 - **Navigation and CTAs:** the home page keeps menu and visit paths clear. The menu gives category navigation priority on a phone, with a compact language switch and simple dish rows.
 - **Mobile:** a short hero hands off quickly to the actual menu; category links remain accessible while scrolling. Arabic uses localized copy and right-to-left layout.
 - **Originality:** the composition, words, map treatment, and section pacing were made for this Meatery preview. None of the referenced sites' layouts, logos, copy, or assets were reused.
+
+## Client-requested QR menu refinement
+
+Reviewed the client’s [Ramo menu reference](https://ramo-menu.vercel.app/menu). Useful interaction patterns were category filtering, search in either language, a clear result count, and access to dish information. Meatery retains its own monochrome palette, condensed headings, flame mark, and editorial dish rows. No Ramo branding, imagery, copy, or page composition was reused.
+
+`/menu-qr-code` puts the menu first: a compact masthead, sticky search and category controls, a complete category picker, readable dish names, and optional patty/side selections. No food photos load on this route. `/menu` uses the same content and controls with a larger photographic introduction. The two pages have no ordering, cart, payment, account, or backend dependency.
+
+## Arabic homepage and supplied kinetic navigation
+
+The Arabic homepage keeps the large MEATERY wordmark while translating the complete restaurant story, calls to action, visit information, image descriptions, and footer. Layout, typography, and hero image treatment adapt to right-to-left reading. The language control follows the reference's straightforward Arabic/English toggle pattern and preserves the guest's choice across routes.
+
+The user-supplied Sterling Gate component was adapted to Meatery's actual links and warm monochrome styling. Layered panels, staggered link movement, a rolling Menu/Close trigger, and subtle brand-mark movement provide its animation. A native dialog adds keyboard focus containment; reduced motion avoids animated transitions. The GSAP module is separate from the initial QR menu bundle.

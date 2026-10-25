@@ -18,19 +18,51 @@ export function Arrow({ diagonal = false }) {
   );
 }
 
-export function Asterisk({ className = "" }) {
+export function SearchIcon() {
   return (
     <svg
-      className={`asterisk ${className}`.trim()}
-      viewBox="0 0 32 32"
+      className="menu-icon"
+      viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.2"
-      strokeLinecap="round"
+      strokeWidth="1.4"
       aria-hidden="true"
       focusable="false"
     >
-      <path d="M16 3v26M3 16h26M6.8 6.8l18.4 18.4M6.8 25.2 25.2 6.8" />
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <path d="m15.5 15.5 5 5" />
+    </svg>
+  );
+}
+
+export function CloseIcon() {
+  return (
+    <svg
+      className="menu-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="m6 6 12 12M6 18 18 6" />
+    </svg>
+  );
+}
+
+export function CategoriesIcon() {
+  return (
+    <svg
+      className="menu-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M4 4h5v5H4zM15 4h5v5h-5zM4 15h5v5H4zM15 15h5v5h-5z" />
     </svg>
   );
 }
