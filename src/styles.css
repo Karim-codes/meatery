@@ -1,7 +1,8 @@
 :root {
   font-family: "DM Sans", sans-serif;
   color: #181817;
-  background: #f3f1eb;
+  /* Safari uses the document canvas to colour its status bar and safe areas. */
+  background: #10100f;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,6 +16,7 @@ html {
 }
 body {
   margin: 0;
+  background: #10100f;
 }
 body.nav-open {
   overflow: hidden;
