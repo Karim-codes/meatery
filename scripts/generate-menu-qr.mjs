@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import QRCode from "qrcode";
-import { site } from "../src/data/site.js";
+import { getWebsiteOrigin, site } from "../src/data/site.js";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const urlArgument = process.argv.indexOf("--url");
@@ -10,7 +10,18 @@ const target = process.argv[urlArgument + 1];
 if (urlArgument !== -1 && (!target || target.startsWith("--"))) {
   throw new Error("Provide a public menu URL after --url.");
 }
-const url = new URL(urlArgument === -1 ? site.qrMenuUrl : target);
+// A printed code must always encode an explicit, public address. Until a domain
+// is verified, preserve the last approved destination instead of guessing one.
+const websiteOrigin = getWebsiteOrigin();
+const approvedDestination =
+  urlArgument !== -1
+    ? target
+    : websiteOrigin
+      ? new URL(site.qrMenuPath, websiteOrigin).href
+      : (
+          await readFile(path.join(root, "public/qr/destination.txt"), "utf8")
+        ).trim();
+const url = new URL(approvedDestination);
 if (url.protocol !== "https:")
   throw new Error("The printed QR code must use an HTTPS URL.");
 const escapeXml = (text) =>

@@ -4,6 +4,7 @@ import { Brand } from "./Brand";
 import { NavigationToggle } from "./NavigationToggle";
 import { useLanguage } from "../context/LanguageContext";
 import { navigationCopy } from "../data/homeCopy";
+import { site } from "../data/site";
 import "./ui/kinetic-navigation.css";
 export { Brand } from "./Brand";
 
@@ -120,7 +121,7 @@ export function Footer({ compact = false }) {
         </span>
         <nav aria-label={arabic ? "روابط أسفل الصفحة" : "Footer navigation"}>
           <a href={href("/")}>{copy.home}</a>
-          <a href={href(compact ? "/menu-qr-code" : "/menu")}>{copy.menu}</a>
+          <a href={href(compact ? site.qrMenuPath : "/menu")}>{copy.menu}</a>
           <a href={href("/#visit")}>{copy.visit}</a>
         </nav>
         <span>{copy.footerNote}</span>

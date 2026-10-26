@@ -11,6 +11,8 @@ import {
 import { filterMenu, menuItemCount } from "../utils/menu";
 import { MenuItem, DishDetailsDialog } from "../components/MenuDish";
 import { useLanguage } from "../context/LanguageContext";
+import { PageMetadata } from "../components/PageMetadata";
+import { getLocationLabel, site } from "../data/site";
 import "./menu.css";
 
 const TOTAL_ITEMS = menuItemCount(menuCategories);
@@ -86,18 +88,6 @@ export default function MenuPage({ tableMode = false }) {
   const selectedCategory = menuCategories.find(
     (category) => category.id === categoryId,
   );
-
-  useEffect(() => {
-    document.title = arabic ? "القائمة — ميتري" : "Menu — Meatery";
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute(
-        "content",
-        arabic
-          ? "اكتشف قائمة ميتري في المدينة المنورة، من البرجر إلى الأطباق الخاصة والحلويات."
-          : "Explore the Meatery menu in Madinah: burgers, tacos, sides, sweets and grill specials.",
-      );
-  }, [language, arabic]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -180,6 +170,16 @@ export default function MenuPage({ tableMode = false }) {
     <div
       className={`qr-menu-page ${tableMode ? "qr-menu-page--table" : ""} ${arabic ? "qr-menu-page--arabic" : ""}`}
     >
+      <PageMetadata
+        title={arabic ? `القائمة — ${site.nameAr}` : `Menu — ${site.name}`}
+        description={
+          arabic
+            ? `اكتشف قائمة ${getLocationLabel("ar")}، من البرجر إلى الأطباق الخاصة والحلويات.`
+            : `Explore the menu at ${getLocationLabel()}: burgers, tacos, sides, sweets and grill specials.`
+        }
+        language={language}
+        path={tableMode ? site.qrMenuPath : "/menu"}
+      />
       <a className="qr-skip-link" href="#menu-results">
         {arabic ? "انتقل إلى الأصناف" : "Skip to dishes"}
       </a>
@@ -206,7 +206,9 @@ export default function MenuPage({ tableMode = false }) {
           <div className="qr-shell qr-menu-intro-inner">
             <div>
               <span className="qr-eyebrow">
-                {arabic ? "ميتري · المدينة المنورة" : "MEATERY · MADINAH"}
+                {arabic
+                  ? `${site.nameAr} · ${site.districtAr}، ${site.cityAr}`
+                  : `${site.name} · ${site.district}, ${site.city}`.toUpperCase()}
               </span>
               <h1 id="menu-title">
                 {arabic ? "القائمة" : "THE MENU"}

@@ -1,6 +1,6 @@
 # Meatery website preview
 
-React + Vite website for Meatery in Madinah, prepared for Vercel.
+React + Vite website for Meatery in Al Matal, Madinah, Saudi Arabia, prepared for Vercel.
 
 - `/` — the restaurant homepage.
 - `/menu` — the full branded menu.
@@ -38,7 +38,7 @@ Generated files in `public/qr/`:
 - `meatery-table-card.svg` — self-contained A6 portrait artwork (105 × 148 mm) with the Meatery mark and a large QR code.
 - `destination.txt` — the exact encoded address.
 
-Run `npm run qr:generate` after changing `qrMenuUrl` in `src/data/site.js`, or generate for a new approved URL with:
+The generator preserves `public/qr/destination.txt` until `site.websiteUrl` is configured with a verified production origin. Run `npm run qr:generate` after a deliberate domain switch, or generate for a new approved URL with:
 
 ```bash
 npm run qr:generate -- --url https://example.com/menu-qr-code
@@ -46,7 +46,21 @@ npm run qr:generate -- --url https://example.com/menu-qr-code
 
 Keep the white quiet zone intact, print the code at least 35 mm square, and scan a physical print on a phone before producing the table signs. The A6 card uses a 60 mm code, including its quiet zone. The printed URL remains the same when dishes and prices change.
 
-Confirm the latest deployment serves `/menu-qr-code` before putting QR cards on tables.
+Confirm the latest deployment serves `/menu-qr-code` before putting QR cards on tables. Existing cards still encode the current approved Vercel address; keep that deployment working if the domain changes. Regenerate and reprint cards only when you deliberately want them to use the new address.
+
+## Business details and domain preparation
+
+`src/data/site.js` is the central record for the restaurant name, Al Matal location in both languages, hours, public phone, WhatsApp contact, Instagram, verified Google Maps URL, website origin and QR menu path. Unknown details remain empty or visibly marked as pending. No street address or coordinates are invented. Until `googleMapsUrl` is filled, both directions buttons use a Google Maps area search for Meatery in Al Matal, Madinah. Once the verified place/share link is supplied, set that one field and update the address note if appropriate.
+
+The new UK origins copy is under `homeCopy.en.origins` / `homeCopy.ar.origins` in `src/data/homeCopy.js`. It is editable placeholder brand copy, with a quiet editorial treatment inside Our Story.
+
+**Meatery.com is a requested domain, not a claim of availability or ownership.** `site.websiteUrl` deliberately stays empty. Page metadata then uses the current website origin, with separate English/Arabic canonical URLs and no hard-coded preview host in the application. After ownership is confirmed and the domain is connected in Vercel with working HTTPS:
+
+1. Set `site.websiteUrl` to the verified HTTPS origin (no path or query).
+2. Build and deploy, then check `/`, `/menu`, `/menu-qr-code`, language switching and metadata on that domain.
+3. Decide whether to retain the current printed QR destination or explicitly run `npm run qr:generate` and reprint cards for the new one. Keep the previous QR address working for cards already in circulation.
+
+The business information structure is ready for a future verified Google Business Profile. No listing is created or claimed, no ratings/reviews are fabricated, and no incomplete street address, hours or phone are published as verified structured data. Confirm those details with the client before adding the listing or complete restaurant search markup.
 
 ## Update before launch
 

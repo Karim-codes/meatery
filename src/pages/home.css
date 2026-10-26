@@ -1,3 +1,47 @@
+.origins-note {
+  display: grid;
+  grid-template-columns: 32% 1fr;
+  gap: 5%;
+  margin-top: 76px;
+  padding-top: 56px;
+  border-top: 1px solid #d2ccc2;
+}
+.origins-label {
+  padding-top: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.6;
+  color: #85735b;
+}
+.origins-note h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(42px, 4.4vw, 68px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+.origins-note p {
+  max-width: 560px;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #5d5a54;
+}
+.visit-detail > strong {
+  min-width: 0;
+  line-height: 1.6;
+}
+.visit-detail > strong a {
+  display: inline-block;
+}
+.map-center {
+  width: 82%;
+}
+.map-center > small {
+  margin-top: 5px;
+  line-height: 1.8;
+}
 .home-page--arabic {
   font-family: "Noto Sans Arabic", sans-serif;
 }
@@ -21,6 +65,8 @@
     .social-placeholder,
     .contact-inner > span,
     .map-caption,
+    .map-status,
+    .origins-label,
     .map-center > small
   ) {
   letter-spacing: 0;
@@ -28,6 +74,7 @@
 .home-page--arabic
   :is(
     .intro-main h2,
+    .origins-note h3,
     .craft-copy h2,
     .section-heading-row h2,
     .dish-meta h3,
@@ -105,6 +152,12 @@
 .home-page--arabic .intro-main > p {
   line-height: 1.95;
 }
+.home-page--arabic .origins-note h3 {
+  font-size: clamp(30px, 3.2vw, 48px);
+}
+.home-page--arabic .origins-note p {
+  line-height: 1.95;
+}
 .home-page--arabic .craft-copy h2 {
   font-size: clamp(50px, 4.7vw, 78px);
 }
@@ -148,7 +201,7 @@
 .home-page--arabic .map-center > small {
   white-space: nowrap;
 }
-.home-page--arabic .map-coordinate {
+.home-page--arabic .map-status {
   left: auto;
   right: 25px;
 }
@@ -176,6 +229,22 @@
   line-height: 1.8;
 }
 @media (max-width: 800px) {
+  .origins-note {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 52px;
+    padding-top: 36px;
+  }
+  .origins-label {
+    padding-top: 0;
+  }
+  .origins-note h3 {
+    font-size: 48px;
+  }
+  .origins-note p {
+    margin-top: 20px;
+    font-size: 16px;
+  }
   .home-page--arabic .hero h1 {
     font-size: 21vw;
   }
@@ -196,6 +265,12 @@
   }
 }
 @media (max-width: 560px) {
+  .origins-note p {
+    font-size: 15px;
+  }
+  .home-page--arabic .origins-note h3 {
+    font-size: 32px;
+  }
   .home-page--arabic .hero h1 {
     font-size: 23vw;
   }
@@ -275,7 +350,7 @@
   .home-page--arabic .visit-detail > small {
     font-size: 11px;
   }
-  .home-page--arabic .map-coordinate {
+  .home-page--arabic .map-status {
     right: 16px;
     font-size: 8px;
   }

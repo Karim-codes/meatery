@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Header, Footer } from "../components/SiteChrome";
 import { Arrow } from "../components/Icons";
 import { BrandMark } from "../components/BrandMark";
+import { PageMetadata } from "../components/PageMetadata";
 import { useLanguage } from "../context/LanguageContext";
 import { homeCopy } from "../data/homeCopy";
-import { site } from "../data/site";
+import { getDirectionsUrl, getLocationLabel, site } from "../data/site";
 import "./home.css";
 
 const ASSET = "/images/";
+const directionsUrl = getDirectionsUrl();
 const whatsappUrl = site.whatsappNumber
   ? `https://wa.me/${site.whatsappNumber}`
   : "";
@@ -32,12 +34,6 @@ export default function HomePage() {
   const copy = homeCopy[language];
   const [contactNotice, setContactNotice] = useState(false);
   useEffect(() => {
-    document.title = copy.title;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", copy.description);
-  }, [copy]);
-  useEffect(() => {
     const anchor = window.location.hash.slice(1);
     if (!anchor) return;
     const frame = requestAnimationFrame(() =>
@@ -47,6 +43,12 @@ export default function HomePage() {
   }, []);
   return (
     <div className={`home-page ${arabic ? "home-page--arabic" : ""}`}>
+      <PageMetadata
+        title={copy.title}
+        description={copy.description}
+        language={language}
+        path="/"
+      />
       <Header />
       <main>
         <section className="hero" aria-labelledby="hero-title">
@@ -77,7 +79,7 @@ export default function HomePage() {
                 </a>
                 <a
                   className="text-link text-link--light"
-                  href={site.directionsUrl}
+                  href={directionsUrl}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -116,6 +118,20 @@ export default function HomePage() {
               </a>
             </div>
           </div>
+          <section
+            className="container origins-note"
+            aria-labelledby="origins-title"
+          >
+            <span className="eyebrow origins-label">{copy.origins.label}</span>
+            <div>
+              <h3 id="origins-title">
+                {copy.origins.title}
+                <br />
+                {copy.origins.destination}
+              </h3>
+              <p>{copy.origins.body}</p>
+            </div>
+          </section>
         </section>
         <section className="craft-section" aria-labelledby="craft-heading">
           <div className="craft-image-wrap">
@@ -242,7 +258,7 @@ export default function HomePage() {
               <p>{copy.visit.body}</p>
               <div className="visit-detail">
                 <span>{copy.visit.location}</span>
-                <strong>{arabic ? site.locationAr : site.location}</strong>
+                <strong>{getLocationLabel(language)}</strong>
                 <small>{arabic ? site.addressNoteAr : site.addressNote}</small>
               </div>
               <div className="visit-detail">
@@ -250,9 +266,22 @@ export default function HomePage() {
                 <strong>{arabic ? site.hoursAr : site.hours}</strong>
                 <small>{arabic ? site.hoursNoteAr : site.hoursNote}</small>
               </div>
+              {site.phone && (
+                <div className="visit-detail">
+                  <span>{copy.visit.phone}</span>
+                  <strong>
+                    <a
+                      href={`tel:${site.phone.replace(/[^\d+]/g, "")}`}
+                      dir="ltr"
+                    >
+                      {site.phone}
+                    </a>
+                  </strong>
+                </div>
+              )}
               <a
                 className="button button--dark"
-                href={site.directionsUrl}
+                href={directionsUrl}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -260,7 +289,12 @@ export default function HomePage() {
                 <Arrow diagonal />
               </a>
             </div>
-            <div className="map-panel" aria-label={copy.visit.mapLabel}>
+            <div
+              className="map-panel"
+              role="img"
+              aria-label={copy.visit.mapLabel}
+              aria-describedby="map-caption"
+            >
               <div className="map-streets">
                 <i />
                 <i />
@@ -273,13 +307,15 @@ export default function HomePage() {
                 <div className="map-pin" dir="ltr">
                   M<span>.</span>
                 </div>
-                <span>{copy.visit.city}</span>
-                <small>{copy.visit.country}</small>
+                <span>{copy.visit.district}</span>
+                <small>{copy.visit.region}</small>
               </div>
-              <span className="map-coordinate" dir="ltr">
-                24.47° N / 39.61° E
+              <span className="map-status">{copy.visit.mapStatus}</span>
+              <span className="map-caption" id="map-caption">
+                {site.googleMapsUrl
+                  ? copy.visit.mapCaption
+                  : copy.visit.mapPending}
               </span>
-              <span className="map-caption">{copy.visit.mapCaption}</span>
             </div>
           </div>
         </section>

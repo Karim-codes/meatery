@@ -862,7 +862,7 @@ button:hover .arrow {
   letter-spacing: 0.2em;
   font-weight: 700;
 }
-.map-coordinate,
+.map-status,
 .map-caption {
   position: absolute;
   z-index: 3;
@@ -871,7 +871,7 @@ button:hover .arrow {
   letter-spacing: 0.16em;
   font-weight: 700;
 }
-.map-coordinate {
+.map-status {
   left: 25px;
 }
 .map-caption {
