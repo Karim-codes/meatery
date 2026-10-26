@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Header, Footer } from "../components/SiteChrome";
 import { Arrow } from "../components/Icons";
 import { BrandMark } from "../components/BrandMark";
+import { UnionJack } from "../components/UnionJack";
 import { PageMetadata } from "../components/PageMetadata";
 import { useLanguage } from "../context/LanguageContext";
 import { homeCopy } from "../data/homeCopy";
@@ -122,7 +123,12 @@ export default function HomePage() {
             className="container origins-note"
             aria-labelledby="origins-title"
           >
-            <span className="eyebrow origins-label">{copy.origins.label}</span>
+            <span className="eyebrow origins-label">
+              <span className="origins-flag-frame" aria-hidden="true">
+                <UnionJack />
+              </span>
+              <span>{copy.origins.label}</span>
+            </span>
             <div>
               <h3 id="origins-title">
                 {copy.origins.title}
