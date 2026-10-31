@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Header, Footer } from "../components/SiteChrome";
 import { Arrow } from "../components/Icons";
 import { BrandMark } from "../components/BrandMark";
 import { UnionJack } from "../components/UnionJack";
+import { LocationMap } from "../components/LocationMap";
 import { PageMetadata } from "../components/PageMetadata";
 import { useLanguage } from "../context/LanguageContext";
 import { homeCopy } from "../data/homeCopy";
@@ -11,9 +12,6 @@ import "./home.css";
 
 const ASSET = "/images/";
 const directionsUrl = getDirectionsUrl();
-const whatsappUrl = site.whatsappNumber
-  ? `https://wa.me/${site.whatsappNumber}`
-  : "";
 const featuredClasses = ["first", "second", "third"];
 function SectionLabel({ number, children }) {
   const { arabic } = useLanguage();
@@ -33,7 +31,6 @@ function SectionLabel({ number, children }) {
 export default function HomePage() {
   const { language, arabic, href } = useLanguage();
   const copy = homeCopy[language];
-  const [contactNotice, setContactNotice] = useState(false);
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
     if (!anchor) return;
@@ -295,34 +292,7 @@ export default function HomePage() {
                 <Arrow diagonal />
               </a>
             </div>
-            <div
-              className="map-panel"
-              role="img"
-              aria-label={copy.visit.mapLabel}
-              aria-describedby="map-caption"
-            >
-              <div className="map-streets">
-                <i />
-                <i />
-                <i />
-                <i />
-                <i />
-                <i />
-              </div>
-              <div className="map-center">
-                <div className="map-pin" dir="ltr">
-                  M<span>.</span>
-                </div>
-                <span>{copy.visit.district}</span>
-                <small>{copy.visit.region}</small>
-              </div>
-              <span className="map-status">{copy.visit.mapStatus}</span>
-              <span className="map-caption" id="map-caption">
-                {site.googleMapsUrl
-                  ? copy.visit.mapCaption
-                  : copy.visit.mapPending}
-              </span>
-            </div>
+            <LocationMap copy={copy.visit} />
           </div>
         </section>
         <section className="social-section">
@@ -364,31 +334,6 @@ export default function HomePage() {
               <br />
               <em>{copy.contact.emphasis}</em>
             </h2>
-            {whatsappUrl ? (
-              <a
-                className="button button--light"
-                href={whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {copy.contact.cta}
-                <Arrow diagonal />
-              </a>
-            ) : (
-              <button
-                className="button button--light"
-                type="button"
-                onClick={() => setContactNotice(true)}
-              >
-                {copy.contact.cta}
-                <Arrow diagonal />
-              </button>
-            )}
-            {contactNotice && (
-              <p className="contact-notice" role="status">
-                {copy.contact.pending}
-              </p>
-            )}
           </div>
         </section>
       </main>

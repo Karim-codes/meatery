@@ -18,3 +18,18 @@
 - **Native Safari/iPhone check remains outstanding:** the running Simulator could not be accessed through the available computer-use connection. Chrome phone-size review does not establish native Safari rendering. Check the deployed pages on a physical iPhone before final client sign-off.
 
 No ordering, cart, payment, account, kitchen or backend functionality was added.
+
+## Owner-supplied map pin — 31 October 2026
+
+- Set the shared Google Maps destination to the owner's supplied `https://maps.google.com/?q=24.452402,39.552380`. Both homepage directions CTAs use the exact pin.
+- Made the illustrated location panel a keyboard-accessible link to the same pin, with a monochrome SVG arrow and a visible Google Maps caption on desktop and mobile. The street artwork remains explicitly labelled as an illustration.
+- Removed the pending-pin notice in English and Arabic. No street address, opening hours or other unconfirmed business details were invented.
+- Verification: production build, TypeScript check and all 19 tests pass. Reviewed the desktop location section at 1440 px and English/Arabic mobile views at 390 px; no horizontal overflow in the English mobile page. Clicking the panel opened Google Maps showing `24.452402, 39.552380`. Physical iPhone/Safari verification remains outstanding.
+
+## Geographic map refinement — 31 October 2026
+
+- Replaced the abstract CSS street illustration with real OpenStreetMap tiles centred on the owner-supplied coordinates. The small cream/bronze pin contains the existing Meatery M + flame vector. Actual street labels and terrain remain visible with a warm monochrome treatment.
+- Extracted `LocationMap` as a reusable component. Requests are deferred until the map is in view and cover only its current viewport; there is no background tile download, map library or API key. Linked attribution remains visible. Google Maps directions remain available if the tile service fails.
+- Map coordinates, zoom and tile source/attribution are centrally editable in `src/data/site.js`. Added projection/reference and viewport coverage tests, plus a check that the displayed map and Google Maps destination agree.
+- Production build, TypeScript check and all 22 tests pass. Desktop English (1440 px) and Arabic mobile (390 px) reviews confirmed loaded map tiles, readable overlays and intact directions links; Arabic mobile has no horizontal overflow. Physical iPhone/Safari verification remains outstanding.
+- Removed the homepage WhatsApp CTA and its unavailable-number notice in both languages, at the client's request. Tightened the closing heading's spacing and removed the unused UI state/copy/styles. The final production build, TypeScript check and all 22 tests pass with this removal included.

@@ -50,7 +50,11 @@ Confirm the latest deployment serves `/menu-qr-code` before putting QR cards on 
 
 ## Business details and domain preparation
 
-`src/data/site.js` is the central record for the restaurant name, Al Matal location in both languages, hours, public phone, WhatsApp contact, Instagram, verified Google Maps URL, website origin and QR menu path. Unknown details remain empty or visibly marked as pending. No street address or coordinates are invented. Until `googleMapsUrl` is filled, both directions buttons use a Google Maps area search for Meatery in Al Matal, Madinah. Once the verified place/share link is supplied, set that one field and update the address note if appropriate.
+`src/data/site.js` is the central record for the restaurant name, Al Matal location in both languages, hours, public phone, WhatsApp contact, Instagram, verified Google Maps URL, coordinates, website origin and QR menu path. Unknown details remain empty or visibly marked as pending. The owner's confirmed pin is `24.452402,39.552380`; both directions buttons and the clickable location map use that exact Google Maps link. No street address is assumed. Future pin changes require updating `googleMapsUrl` and `coordinates` together; a test checks that they agree.
+
+`src/components/LocationMap.jsx` renders real OpenStreetMap street tiles with a muted warm-neutral treatment and a vector Meatery marker. The marker tip is anchored to the actual geographic point using Web Mercator projection, including after mobile/desktop resizing. The preview loads only visible tiles when the section enters the viewport, uses normal browser caching/referrer headers, and retains visible linked attribution. It opens Google Maps for navigation rather than intercepting scrolling or touch gestures. If a tile fails, the map clears to a clean branded location card and the directions link remains available.
+
+Map zoom and the tile URL/attribution are in `site.map`. There is no API key, account setup or additional dependency. The current community tile service is best-effort, without an uptime guarantee; use a suitable hosted provider with matching attribution if traffic or service requirements grow. Follow the [OpenStreetMap tile usage policy](https://operations.osmfoundation.org/policies/tiles/); do not prefetch/download tile archives or remove the attribution.
 
 The new UK origins copy is under `homeCopy.en.origins` / `homeCopy.ar.origins` in `src/data/homeCopy.js`. It is editable placeholder brand copy, with a quiet editorial treatment inside Our Story.
 
@@ -67,7 +71,7 @@ The business information structure is ready for a future verified Google Busines
 - The secondary M + flame symbol was recreated as a transparent vector from the supplied logo reference (`public/brand-mark.svg`). Header and footer pair it with the Meatery wordmark. SVG/PNG favicon and Apple touch icon assets use the same symbol.
 - The client’s supplied dish names are included. Replace the clearly marked estimated prices with confirmed `price` values, including each option's price, then turn off `menuPricing.estimated`. Null values remain supported and direct guests to the team. Review Arabic wording with the client and add approved descriptions as `detailEn` / `detailAr`.
 - Fish & Chips, Brisket, Ribs, and Steak on Mash / Chips are grouped under Specials and explicitly marked subject to availability. There are no invented ingredient lists or allergen claims.
-- Add the confirmed map pin, opening hours, WhatsApp number, and Instagram account in `src/data/site.js`. The map panel is illustrative; the WhatsApp button currently explains that the number is still missing.
+- Add the confirmed opening hours and Instagram account in `src/data/site.js`. The map links to the owner's confirmed pin. The homepage WhatsApp CTA was removed at the client's request; the optional contact configuration remains available for a future approved use.
 - Replace generated concept photography with approved photography if the client has it. Current images are in `public/images/`.
 
 ## Image generation

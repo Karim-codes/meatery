@@ -52,12 +52,29 @@
 .visit-detail > strong a {
   display: inline-block;
 }
-.map-center {
-  width: 82%;
+.map-panel {
+  display: block;
 }
-.map-center > small {
-  margin-top: 5px;
-  line-height: 1.8;
+.map-panel:focus-visible {
+  outline: 2px solid #85735b;
+  outline-offset: 5px;
+}
+.map-status {
+  top: 25px;
+  bottom: auto;
+}
+.map-panel .map-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #b7aa94;
+  background: #f4f0e7;
+  bottom: 47px;
+}
+.map-caption .arrow {
+  width: 16px;
+  height: 16px;
 }
 .home-page--arabic {
   font-family: "Noto Sans Arabic", sans-serif;
@@ -84,7 +101,7 @@
     .map-caption,
     .map-status,
     .origins-label,
-    .map-center > small
+    .map-place-card > small
   ) {
   letter-spacing: 0;
 }
@@ -99,8 +116,7 @@
     .gallery-heading h2,
     .visit-copy h2,
     .social-grid h2,
-    .contact-inner h2,
-    .map-center > span
+    .contact-inner h2
   ) {
   font-family: "Noto Sans Arabic", sans-serif;
   letter-spacing: 0;
@@ -211,13 +227,10 @@
 .home-page--arabic .visit-copy h2 em {
   font-size: 0.85em;
 }
-.home-page--arabic .map-center > span {
-  font-size: 27px;
-  white-space: nowrap;
+.home-page--arabic .map-place-card > small {
+  letter-spacing: 0;
 }
-.home-page--arabic .map-center > small {
-  white-space: nowrap;
-}
+.home-page--arabic .map-coordinates,
 .home-page--arabic .map-status {
   left: auto;
   right: 25px;
@@ -241,9 +254,6 @@
 }
 .home-page--arabic .contact-inner h2 em {
   font-size: 0.78em;
-}
-.home-page--arabic .contact-notice {
-  line-height: 1.8;
 }
 @media (max-width: 800px) {
   .origins-note {
@@ -386,8 +396,5 @@
   }
   .home-page--arabic .contact-inner h2 {
     font-size: 47px;
-  }
-  .home-page--arabic .contact-inner > .button {
-    font-size: 12px;
   }
 }

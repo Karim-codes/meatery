@@ -8,9 +8,15 @@ export const site = {
   // not assumed to be owned, available or connected.
   websiteUrl: "",
   qrMenuPath: "/menu-qr-code",
-  // Replace with the client's verified Google Maps place/share link when supplied.
-  // Until then, directions open a labelled area search, not an invented map pin.
-  googleMapsUrl: "",
+  // Exact pin supplied by the restaurant owner. No street address is assumed.
+  googleMapsUrl: "https://maps.google.com/?q=24.452402,39.552380",
+  coordinates: { latitude: 24.452402, longitude: 39.55238 },
+  map: {
+    zoom: 15,
+    tileUrl: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attributionUrl: "https://www.openstreetmap.org/copyright",
+    attribution: "© OpenStreetMap contributors",
+  },
   phone: "", // Confirmed public phone number, preferably international format.
   whatsappNumber: "", // International digits only, e.g. 9665…
   instagramUrl: "",
@@ -20,9 +26,8 @@ export const site = {
   cityAr: "المدينة المنورة",
   country: "Saudi Arabia",
   countryAr: "المملكة العربية السعودية",
-  addressNote: "Al Matal location. Exact address and map pin to be confirmed.",
-  addressNoteAr:
-    "موقعنا في المطل. سيتم تأكيد العنوان الدقيق ورابط الموقع قريباً.",
+  addressNote: "Find our exact location on Google Maps.",
+  addressNoteAr: "تجدون موقعنا الدقيق على خرائط جوجل.",
   hours: "Coming soon",
   hoursAr: "قريباً",
   hoursNote: "Hours will be shared before opening.",
