@@ -20,6 +20,8 @@ For approved dish photography, add `image` (a local asset path), `imageAltEn`, a
 
 ## Run locally
 
+For the isolated payment experiment on `experiment/moyasar-payments`, see [Moyasar sandbox instructions](docs/MOYASAR_SANDBOX.md). It uses separate lab routes, a local-only backend and an ignored SQLite database. Normal builds exclude the lab. It is not a production ordering feature.
+
 ```bash
 npm install
 npm run dev
