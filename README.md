@@ -1,6 +1,6 @@
 # Meatery website preview
 
-React + Vite website for Meatery in Al Matal, Madinah, Saudi Arabia, prepared for Vercel.
+React + Vite website for Meatery in Al Matal, Madinah, Saudi Arabia, prepared for Cloudflare Workers static hosting and Vercel.
 
 - `/` — the restaurant homepage.
 - `/menu` — the full branded menu.
@@ -26,6 +26,18 @@ npm run dev
 ```
 
 Run `npm run build` to create the production bundle and `npm test` for menu data/search checks. `vercel.json` supports direct requests to all three routes.
+
+## Cloudflare hosting
+
+The committed `wrangler.jsonc` deploys only `dist/` and enables direct requests to the homepage and both menu routes. It contains public hosting settings, not credentials, and must stay in Git. The compatibility date is pinned to the date supported by the verified local Workers runtime. No Worker backend, payment API, database or secret binding is configured.
+
+For the Cloudflare Workers Git integration, use production branch `main`, repository root, build command `npm run build` and deploy command `npx wrangler deploy`. The project name must match `meatery`. Use Node 22.17 or newer on a Vite-supported release. Disable preview builds while the payment experiment is parked. The public website needs no Moyasar credentials or lab environment flags in the hosting dashboard.
+
+`public/_headers` applies baseline security headers to Cloudflare static responses. `vercel.json` retains the existing Vercel routing. These are platform-specific configuration files; neither contains secrets.
+
+Local `.env*` credentials, `.dev.vars*`, `.sandbox/` payment data, `dist-lab/`, `.wrangler/` state and private key/certificate files are ignored. The empty `.env.moyasar-lab.example` template is the one intentional env-file exception on the experiment branch. Ignored files can still be opened in the editor; `.gitignore` prevents ordinary Git staging, not local visibility. Never force-add them. `vite.config.mjs` also denies development-server access to local payment files left on disk after switching branches. See [the security review](docs/SECURITY_REVIEW.md).
+
+Keep the existing Vercel URL serving the menu for printed QR cards until an approved QR migration is complete. Set the central production origin only once the new hostname is confirmed and connected.
 
 ## Table QR code
 

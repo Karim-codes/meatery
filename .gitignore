@@ -2,3 +2,19 @@ node_modules/
 dist/
 .DS_Store
 .vercel/
+
+# Local credentials and payment experiment data, on every branch.
+.env*
+!.env.moyasar-lab.example
+.dev.vars*
+.sandbox/
+dist-lab/
+
+# Cloudflare's local state is private; wrangler.jsonc is shared configuration.
+.wrangler/
+
+# Private certificate material must never enter the repository.
+*.pem
+*.key
+*.p12
+*.pfx
